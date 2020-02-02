@@ -9,6 +9,9 @@ data "template_file" "template_values" {
     grafana_username        = "${var.grafana["grafana_username"]}"
     grafana_client_secret   = "${var.grafana["grafana_client_secret"]}"
     grafana_auth_client_id  = "${var.grafana["grafana_auth_client_id"]}"
+    smtp_user               = "${var.grafana["smtp_username"]}"
+    smtp_password           = "${var.grafana["smtp_password"]}"
+    smtp_host               = "${var.grafana["smtp_host"]}" 
   }
 }
 
