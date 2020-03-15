@@ -69,3 +69,10 @@ resource "null_resource" "start_helm" {
   }
 }
 
+resource "null_resource" "ready_helm" {
+  depends_on = ["null_resource.start_helm"]
+    provisioner "local-exec" {
+      when    = "create"
+      command = "sleep 10"
+  }
+}
