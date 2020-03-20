@@ -1,19 +1,45 @@
+resource "null_resource" "helm_init" {
+  depends_on = [
+    "kubernetes_service_account.tiller",
+    "kubernetes_secret.tiller",
+    "kubernetes_cluster_role_binding.tiller_cluster_rule"
+  ]
+  provisioner "local-exec" {
+    command = <<EOF
+    kubectl delete deploy -n kube-system  tiller-deploy || echo "Already Deleted from Kubernetes Cluster"
+    helm init --service-account ${kubernetes_service_account.tiller.metadata.0.name} --tiller-namespace ${kubernetes_service_account.tiller.metadata.0.namespace}
+    EOF
+  }
+}
+
 ## Service account for tiller
 resource "kubernetes_service_account" "tiller" {
   metadata {
     name      = "tiller"
-    namespace = "kube-system"
+    namespace = "${var.tiller_namespace}"
   }
-
+  secret {
+    name = "${kubernetes_secret.tiller.metadata.0.name}"
+  }
   automount_service_account_token = true
 }
 
-## Cluster role binding for tiller
-resource "kubernetes_cluster_role_binding" "tiller-cluster-admin" {
-    depends_on = ["kubernetes_service_account.tiller"]
+## Secret for tillers service account
+resource "kubernetes_secret" "tiller" {
+  metadata {
+    name      = "tiller"
+    namespace = "${var.tiller_namespace}"
+  }
+}
 
+## Cluster role binding for tiller
+resource "kubernetes_cluster_role_binding" "tiller_cluster_rule" {
+    depends_on = [
+      "kubernetes_service_account.tiller",
+      "kubernetes_secret.tiller"
+    ]
     metadata {
-        name = "tiller-cluster-admin"
+        name = "tiller-cluster-rule"
     }
     role_ref {
         api_group = "rbac.authorization.k8s.io"
@@ -25,54 +51,4 @@ resource "kubernetes_cluster_role_binding" "tiller-cluster-admin" {
         name      = "${kubernetes_service_account.tiller.metadata.0.name}"
         namespace = "${kubernetes_service_account.tiller.metadata.0.namespace}"
     }
-}
-
-## Install Helm in the bastion
-
-resource "null_resource" "get_helm" {
-  depends_on = ["${kubernetes_cluster_role_binding.tiller-cluster-admin}"]
-    provisioner "local-exec" {
-      when    = "create"
-      command = "curl -O https://get.helm.sh/helm-v2.16.3-linux-amd64.tar.gz"
-    }
-  }
-
-resource "null_resource" "tar_helm" {
-  depends_on = ["null_resource.get_helm"]
-    provisioner "local-exec" {
-      when    = "create"
-      command = "tar -xf helm-v2.16.3-linux-amd64.tar.gz"
-    }
-  }
-
-resource "null_resource" "mv_helm" {
-  depends_on = ["null_resource.tar_helm"]
-    provisioner "local-exec" {
-      when    = "create"
-      command = "mv linux-amd64/helm /usr/local/bin/helm"
-    }
-  }
-
-resource "null_resource" "rm_helm" {
-  depends_on = ["null_resource.mv_helm"]
-    provisioner "local-exec" {
-      when    = "create"
-      command = "rm -rf helm-v2.16.3-linux-amd64.tar.gz linux-amd64"
-    }
-  }
-
-resource "null_resource" "start_helm" {
-  depends_on = ["null_resource.rm_helm"]
-    provisioner "local-exec" {
-      when    = "create"
-      command = "helm init --service-account tiller"
-  }
-}
-
-resource "null_resource" "ready_helm" {
-  depends_on = ["null_resource.start_helm"]
-    provisioner "local-exec" {
-      when    = "create"
-      command = "sleep 10"
-  }
 }
