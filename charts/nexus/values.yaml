@@ -32,7 +32,7 @@ securityContext: {}
 
 docker:
   repo_port: 8085 #${repo_port}
-  docker_endpoint: dockernew.gcp.huseyinakten.net #${docker_endpoint}
+  docker_endpoint: dockern.gcp.huseyinakten.net #${docker_endpoint}
 
 service:
   type: ClusterIP
@@ -44,14 +44,14 @@ ingress:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
-    - host: nexusnew.gcp.huseyinakten.net #${deployment_endpoint}
+    - host: nexusn.gcp.huseyinakten.net #${deployment_endpoint}
       paths:
       - /
 
   tls:
    - secretName: nexus-tls
      hosts:
-     - nexusnew.gcp.huseyinakten.net #${deployment_endpoint}
+     - nexusn.gcp.huseyinakten.net #${deployment_endpoint}
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
