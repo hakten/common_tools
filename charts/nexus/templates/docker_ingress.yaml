@@ -23,4 +23,4 @@ spec:
   tls:
   - hosts:
     - {{ .Values.docker.docker_endpoint}}
-    secretName: tls-docker-prod-cert
+    secretName: tls-docker-cert-new
