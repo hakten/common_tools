@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nexus-pvc
+  name: nexus-pvc-new
   labels:
     app: nexus-deployment
 spec:

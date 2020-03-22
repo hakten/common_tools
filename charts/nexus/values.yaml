@@ -1,7 +1,7 @@
 # Default values for nexus.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-deploymentName: ${var.deployment_name}
+deploymentName: ${deployment_name}
 
 replicaCount: 1
 
@@ -35,9 +35,9 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port-docker: 8085
+  port-docker: ${repo_port}
   targetport-docker: 8085
-  port-nexus: ${var.nexus_port}
+  port-nexus: ${nexus_port}
   targetport-nexus: 8081
 
 
