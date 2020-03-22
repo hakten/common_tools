@@ -26,5 +26,4 @@ spec:
   - hosts:
     - vault.{{ .Values.domain_name}}
     - nexus.{{ .Values.domain_name}}
-    - grafana.{{ .Values.domain_name}}
     secretName: tls-prod-cert
