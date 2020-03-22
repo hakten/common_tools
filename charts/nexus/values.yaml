@@ -41,7 +41,7 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
     - host: nexusnew.gcp.huseyinakten.net
-      paths: []
+      paths: /
 
   tls:
    - secretName: nexus-tls
