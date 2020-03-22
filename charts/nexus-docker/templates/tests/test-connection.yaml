@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: "{{ include "nexus.fullname" . }}-test-connection"
   labels:
-    {{- include "nexus.labels" . | nindent 4 }}
+{{ include "nexus.labels" . | indent 4 }}
   annotations:
     "helm.sh/hook": test-success
 spec:
@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "nexus.fullname" . }}:{{ .Values.service.port }}']
+      args:  ['{{ include "nexus.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never
