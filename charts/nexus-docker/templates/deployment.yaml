@@ -67,4 +67,4 @@ spec:
       volumes:
       - name: "nexus-pvc"
         persistentVolumeClaim:
-          claimName: "nexus-pvc-new"
+          claimName: "nexus"
