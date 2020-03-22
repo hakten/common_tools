@@ -35,10 +35,10 @@ spec:
             mountPath: "/nexus-data"
           ports:
             - name: docker
-              containerPort: {{ .Values.service.targetport-docker }}
+              containerPort: {{ .Values.service.targetportdocker }}
               protocol: TCP
             - name: nexus
-              containerPort: {{ .Values.service.targetport-nexus }}
+              containerPort: {{ .Values.service.targetportnexus }}
               protocol: TCP
           livenessProbe:
             httpGet:
