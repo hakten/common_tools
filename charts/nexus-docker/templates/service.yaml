@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "nexus.fullname" . }}
   labels:
-    {{- include "nexus.labels" . | indent 4 }}
+{{ include "nexus.labels" . | indent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -16,4 +16,5 @@ spec:
       protocol: TCP
       name: nexus
   selector:
-    {{- include "nexus.selectorLabels" . | indent 4 }}
+    app.kubernetes.io/name: {{ include "nexus.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
