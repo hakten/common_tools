@@ -18,8 +18,7 @@ resource "null_resource" "cert_manager" {
     "kubernetes_secret.tiller",
     "kubernetes_cluster_role_binding.tiller_cluster_rule",
     "kubernetes_deployment.vault_deployment",
-    "kubernetes_service.vault_service",
-    "kubernetes_service.nexus_service"
+    "kubernetes_service.vault_service"
   ]
   provisioner "local-exec" {
     command = <<EOF
