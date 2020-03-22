@@ -27,11 +27,3 @@
 {{- end }}
 {{- end }}
 
-3. Login with the password from step 1 and the username: {{ .Values.adminUser }}
-
-{{- if not .Values.persistence.enabled }}
-#################################################################################
-######   WARNING: Persistence is disabled!!! You will lose your data when   #####
-######            the nexus pod is terminated.                            #####
-#################################################################################
-{{- end }}
