@@ -7,12 +7,12 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port-docker }}
-      targetPort: {{ .Values.service.targetport-docker }}
+    - port: {{ .Values.service.portdocker }}
+      targetPort: {{ .Values.service.targetportdocker }}
       protocol: TCP
       name: docker
-    - port: {{ .Values.service.port-nexus }}
-      targetPort: {{ .Values.service.targetport-nexus }}
+    - port: {{ .Values.service.portnexus }}
+      targetPort: {{ .Values.service.targetportnexus }}
       protocol: TCP
       name: nexus
   selector:

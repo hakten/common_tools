@@ -35,10 +35,10 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port-docker: ${repo_port}
-  targetport-docker: 8085
-  port-nexus: ${nexus_port}
-  targetport-nexus: 8081
+  portdocker: ${repo_port}
+  targetportdocker: 8085
+  portnexus: ${nexus_port}
+  targetportnexus: 8081
 
 
 ingress:
