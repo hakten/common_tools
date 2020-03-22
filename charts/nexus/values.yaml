@@ -42,7 +42,7 @@ ingress:
   hosts:
     - host: nexusnew.gcp.huseyinakten.net
       paths:
-      - path: "/"
+      - /
 
   tls:
    - secretName: nexus-tls
