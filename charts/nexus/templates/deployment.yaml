@@ -63,6 +63,6 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-      - name: nexus-pvc
+      - name: "nexus-pvc"
         persistentVolumeClaim:
           claimName: "nexus-pvc-new"
