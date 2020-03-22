@@ -3,7 +3,7 @@ module "nexus_deploy" {
   deployment_name        = "nexus-new"
   deployment_environment = "${var.deployment_environment}"
   deployment_endpoint    = "nexusnew.${var.google_domain_name}"
-  deployment_path        = "nexus-docker"
+  deployment_path        = "nexus"
 
   template_custom_vars = {
     
