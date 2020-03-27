@@ -2,6 +2,7 @@
 *.state*
 *.tfstate*
 *.terraform*
+*.json*
 common-service-account.json
 *backend.tf*
 *cache*

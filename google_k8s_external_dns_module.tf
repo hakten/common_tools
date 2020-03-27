@@ -7,7 +7,6 @@ module "external-dns" {
   deployment_endpoint     = "${var.google_domain_name}"
   deployment_path         = "external-dns"
   template_custom_vars    = {
-    null_depends_on       = "${null_resource.helm_init.id}"
     google_project        = "${var.google_project_id}"
   }
 }
