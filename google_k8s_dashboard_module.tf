@@ -4,6 +4,9 @@ module "dashboard_deployer" {
   deployment_environment = "kube-system"
   deployment_endpoint    = "dashboard.${var.google_domain_name}"
   deployment_path        = "kubernetes-dashboard"
-
+  
+  template_custom_vars    = {
+    null_depends_on       = "${null_resource.helm_init.id}"
+  }
 
 }

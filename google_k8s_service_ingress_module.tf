@@ -7,6 +7,9 @@ module "ingress_deploy" {
   deployment_path        = "main-helm"
 
   template_custom_vars = {
+
+    null_depends_on          = "${null_resource.helm_init.id}"
+
     
     nexusport = "${var.nexus_service_port}"
     vaultport = "${var.vault_service_port}"
