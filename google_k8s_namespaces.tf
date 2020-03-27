@@ -18,6 +18,10 @@ resource "kubernetes_namespace" "prod_namespace" {
 
 ## Create namespace for Dev, QA, Prod and Tools
 resource "kubernetes_namespace" "service_tools" {
+  depends_on = [
+    "null_resource.helm_init"
+    ]
+
   metadata {
     name = "${var.deployment_environment}"
   }
