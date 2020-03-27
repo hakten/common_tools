@@ -7,7 +7,7 @@ module "grafana_deploy" {
 
   template_custom_vars = {
 
-    deneme                   = "${null_resource.helm_init}"
+    deneme                   = "${null_resource.helm_init.id}"
     
     datasource_dns_endpoint  = "https://prometheus.${var.google_domain_name}"
     grafana_password         = "${var.grafana["grafana_password"]}"
