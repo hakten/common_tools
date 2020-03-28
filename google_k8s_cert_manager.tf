@@ -13,9 +13,7 @@ resource "helm_release" "cert_manager" {
 
 resource "null_resource" "cert_manager" {
   depends_on = [
-    "kubernetes_service_account.tiller",
-    "kubernetes_secret.tiller",
-    "kubernetes_cluster_role_binding.tiller_cluster_rule"
+    "null_resource.helm_init"
   ]
   provisioner "local-exec" {
     command = <<EOF
