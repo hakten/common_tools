@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nexus-pwd
+  namespace: tools
+spec: 
+  containers:
+    - name: password
+      image: fuchicorp/buildtools
+      command: 
+      - "/bin/bash"
+      args:
+      - "-c"
+      - cd && bash nexuspass.sh http://{{ include "nexus.fullname" . }}:{{ .Values.service.port }} {{ .Values.password.current }} {{ .Values.password.new }}
+      volumeMounts:
+      - name: passwordcm
+        mountPath: "/root"
+  restartPolicy: OnFailure
+  volumes:
+  - name: passwordcm
+    configMap:
+      name: nexus-pwd-cm

@@ -30,6 +30,10 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+password:
+  current: admin70
+  new: admin71
+
 docker:
   repo_port: ${repo_port}
   docker_endpoint: ${docker_endpoint}
